@@ -17,12 +17,22 @@
 void CMenus::RenderStartMenu(CUIRect MainView)
 {
 	// render logo
+	/*
 	Graphics()->TextureSet(g_pData->m_aImages[IMAGE_BANNER].m_Id);
 	Graphics()->QuadsBegin();
 	Graphics()->SetColor(1,1,1,1);
 	IGraphics::CQuadItem QuadItem(MainView.w/2-140, 60, 280, 70);
 	Graphics()->QuadsDrawTL(&QuadItem, 1);
 	Graphics()->QuadsEnd();
+	*/
+
+	CUIRect BloatwarsLabel;
+	
+	MainView.HMargin(60, &BloatwarsLabel);
+	UI()->DoLabel(&BloatwarsLabel, "BloatWars", 40.0f, CUI::ALIGN_CENTER);
+
+	BloatwarsLabel.HMargin(60, &BloatwarsLabel);
+	UI()->DoLabel(&BloatwarsLabel, "Client", 30.0f, CUI::ALIGN_CENTER);
 
 	CUIRect TopMenu, BottomMenu;
 	MainView.VMargin(MainView.w/2-190.0f, &TopMenu);
@@ -109,7 +119,7 @@ void CMenus::RenderStartMenu(CUIRect MainView)
 		UI()->DoLabel(&Version, aBuf, 14.0f, CUI::ALIGN_CENTER);
 		TextRender()->TextColor(1.0f, 1.0f, 1.0f, 1.0f);
 	}
-	UI()->DoLabel(&Version, GAME_RELEASE_VERSION, 14.0f, CUI::ALIGN_RIGHT);
+	UI()->DoLabel(&Version, GAME_VERSION, 14.0f, CUI::ALIGN_RIGHT);
 
 	if(NewPage != -1)
 		SetMenuPage(NewPage);
