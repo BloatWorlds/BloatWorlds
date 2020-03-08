@@ -1,8 +1,8 @@
-<a href="https://repology.org/metapackage/teeworlds/versions">
-    <img src="https://repology.org/badge/vertical-allrepos/teeworlds.svg" alt="Packaging status" align="right">
-</a>
+# BloatWorlds
 
-Teeworlds ![GitHub Actions](https://github.com/teeworlds/teeworlds/workflows/Build/badge.svg)
+A teeworlds client with lot of options.
+
+Teeworlds
 =========
 
 A retro multiplayer shooter
