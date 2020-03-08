@@ -2,6 +2,8 @@
 
 A teeworlds client with lot of options.
 
+Work in progress.
+
 Teeworlds
 =========
 

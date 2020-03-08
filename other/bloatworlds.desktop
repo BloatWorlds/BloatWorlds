@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=Teeworlds
+Name=BloatWorlds
 GenericName=Online multi-player 2D platform shooter
 Type=Application
 Terminal=false
-Exec=teeworlds
-Icon=teeworlds
-Comment=Teeworlds: Jumping the Gun
+Exec=bloatworlds
+Icon=bloatworlds
+Comment=A custom client of Teeworlds
 Categories=Game;ArcadeGame;
