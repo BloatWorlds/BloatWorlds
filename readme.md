@@ -1,4 +1,4 @@
-# BloatWorlds
+# BloatWorlds ![Build](https://github.com/BloatWorlds/BloatWorlds/workflows/Build/badge.svg)
 
 A teeworlds client with lot of options.
 
