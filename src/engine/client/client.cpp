@@ -675,7 +675,6 @@ void CClient::DebugRender()
 	static float FrameTimeAvg = 0;
 	static IGraphics::CTextureHandle s_Font = Graphics()->LoadTexture("ui/debug_font.png", IStorage::TYPE_ALL, CImageInfo::FORMAT_AUTO, IGraphics::TEXLOAD_NORESAMPLE);
 	char aBuffer[256];
-	int64 Now = time_get();
 
 	//m_pGraphics->BlendNormal();
 	Graphics()->TextureSet(s_Font);
@@ -734,8 +733,7 @@ void CClient::DebugRender()
 		}
 	}
 
-	str_format(aBuffer, sizeof(aBuffer), "pred: %d ms",
-		(int)((m_PredictedTime.Get(Now)-m_GameTime.Get(Now))*1000/(float)time_freq()));
+	str_format(aBuffer, sizeof(aBuffer), "pred: %d ms", GetPredictionTime());
 	Graphics()->QuadsText(2, 70, 16, aBuffer);
 	Graphics()->QuadsEnd();
 
@@ -2700,4 +2698,10 @@ int main(int argc, const char **argv) // ignore_convention
 	delete pEngineMasterServer;
 
 	return 0;
+}
+
+int CClient::GetPredictionTime()
+{
+	int64 Now = time_get();
+	return (int)((m_PredictedTime.Get(Now)-m_GameTime.Get(Now))*1000/(float)time_freq());
 }

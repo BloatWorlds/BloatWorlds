@@ -419,6 +419,16 @@ void CHud::RenderFps()
 	}
 }
 
+void CHud::RenderPredictionTime()
+{
+	if(!Config()->m_ClShowpred)
+		return;
+		
+	char aBuf[64];
+	str_format(aBuf, sizeof(aBuf), "%d", Client()->GetPredictionTime());
+	TextRender()->Text(0, m_Width-10-TextRender()->TextWidth(0, 12, aBuf, -1, -1), Config()->m_ClShowfps ? 20 : 5, 12, aBuf, -1);
+}
+
 void CHud::RenderConnectionWarning()
 {
 	if(Client()->ConnectionProblems())
@@ -843,6 +853,7 @@ void CHud::OnRender()
 		RenderScoreHud();
 		RenderWarmupTimer();
 		RenderFps();
+		RenderPredictionTime();
 		if(Client()->State() != IClient::STATE_DEMOPLAYBACK)
 			RenderConnectionWarning();
 		RenderTeambalanceWarning();

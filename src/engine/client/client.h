@@ -327,5 +327,9 @@ public:
 	void ToggleFullscreen();
 	void ToggleWindowBordered();
 	void ToggleWindowVSync();
+
+	// BloatWorlds
+
+	int GetPredictionTime();
 };
 #endif
