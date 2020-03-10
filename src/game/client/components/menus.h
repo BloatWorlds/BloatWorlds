@@ -324,6 +324,7 @@ private:
 		SETTINGS_CONTROLS,
 		SETTINGS_GRAPHICS,
 		SETTINGS_SOUND,
+		SETTINGS_BLOATWORLDS,
 
 		ACTLB_NONE=0,
 		ACTLB_LANG,
@@ -741,6 +742,7 @@ private:
 	void RenderSettingsControls(CUIRect MainView);
 	void RenderSettingsGraphics(CUIRect MainView);
 	void RenderSettingsSound(CUIRect MainView);
+	void RenderSettingsBloat(CUIRect MainView);
 	void RenderSettings(CUIRect MainView);
 
 	bool DoResolutionList(CUIRect* pRect, CListBox* pListBox,
@@ -756,6 +758,7 @@ private:
 	float RenderSettingsControlsScoreboard(CUIRect View);
 	float RenderSettingsControlsStats(CUIRect View);
 	float RenderSettingsControlsMisc(CUIRect View);
+	float RenderSettingsBloatHud(CUIRect View);
 
 	void DoJoystickAxisPicker(CUIRect View);
 

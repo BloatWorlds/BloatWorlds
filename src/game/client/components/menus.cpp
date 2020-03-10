@@ -1068,7 +1068,8 @@ void CMenus::RenderMenubar(CUIRect Rect)
 	if((Client()->State() == IClient::STATE_OFFLINE && m_MenuPage == PAGE_SETTINGS) || (Client()->State() == IClient::STATE_ONLINE && m_GamePage == PAGE_SETTINGS))
 	{
 		float Spacing = 3.0f;
-		float ButtonWidth = (Box.w/6.0f)-(Spacing*5.0)/6.0f;
+		float NumSettingsButtons = 7.f;
+		float ButtonWidth = (Box.w/NumSettingsButtons)-(Spacing*5.0)/NumSettingsButtons;
 		float NotActiveAlpha = Client()->State() == IClient::STATE_ONLINE ? 0.5f : 1.0f;
 		int Corners = Client()->State() == IClient::STATE_ONLINE ? CUI::CORNER_T : CUI::CORNER_ALL;
 
@@ -1140,6 +1141,16 @@ void CMenus::RenderMenubar(CUIRect Rect)
 		{
 			m_pClient->m_pCamera->ChangePosition(CCamera::POS_SETTINGS_SOUND);
 			Config()->m_UiSettingsPage = SETTINGS_SOUND;
+		}
+
+		Box.VSplitLeft(Spacing, 0, &Box); // little space
+		Box.VSplitLeft(ButtonWidth, &Button, &Box);
+		static CButtonContainer s_BloatWorldsButton;
+		if(DoButton_MenuTabTop(&s_BloatWorldsButton, Localize("Bloat"), Client()->State() == IClient::STATE_OFFLINE && Config()->m_UiSettingsPage==SETTINGS_BLOATWORLDS, &Button,
+			Config()->m_UiSettingsPage == SETTINGS_BLOATWORLDS ? 1.0f : NotActiveAlpha, 1.0f, Corners))
+		{
+			m_pClient->m_pCamera->ChangePosition(CCamera::POS_SETTINGS_BLOATWORLDS);
+			Config()->m_UiSettingsPage = SETTINGS_BLOATWORLDS;
 		}
 	}
 	else if((Client()->State() == IClient::STATE_OFFLINE && m_MenuPage >= PAGE_INTERNET && m_MenuPage <= PAGE_LAN) || (Client()->State() == IClient::STATE_ONLINE && m_GamePage >= PAGE_INTERNET && m_GamePage <= PAGE_LAN))
