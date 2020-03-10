@@ -7,26 +7,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macOS-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest]
         include:
         - os: ubuntu-latest
           cmake-args: -G "Unix Makefiles"
           build-args: --parallel
           package-file: bloatworlds-*-linux_x86_64.tar.xz
-          env:
-            CFLAGS: -Wdeclaration-after-statement -Werror
-            CXXFLAGS: -Werror
-        - os: ubuntu-16.04
-          cmake-path: /usr/bin/
-          cmake-args: -G "Unix Makefiles"
-          package-file: bloatworlds-*-linux_x86_64.tar.xz
-          env:
-            CFLAGS: -Wdeclaration-after-statement -Werror
-            CXXFLAGS: -Werror
-        - os: macOS-latest
-          cmake-args: -G "Unix Makefiles"
-          build-args: --parallel
-          package-file: bloatworlds-*-osx.dmg
           env:
             CFLAGS: -Wdeclaration-after-statement -Werror
             CXXFLAGS: -Werror
@@ -52,12 +38,6 @@ jobs:
       run: |
         sudo apt-get update -y
         sudo apt-get install pkg-config cmake libfreetype6-dev libsdl2-dev -y
-
-    - name: Prepare MacOS
-      if: contains(matrix.os, 'macOS')
-      run: |
-        brew update
-        brew install pkg-config freetype sdl2
 
     - name: Build in debug mode
       env: ${{ matrix.env }}
