@@ -438,9 +438,9 @@ float CMenus::RenderSettingsBloatHud(CUIRect View)
 	static int s_ButtonShowPred = 0;
 
 	// TODO: Change this when show_pred is pushed.
-	if(DoButton_CheckBox(&s_ButtonShowPred, Localize("Show Prediction (ping)"), Config()->m_ClShowfps, &Button))
+	if(DoButton_CheckBox(&s_ButtonShowPred, Localize("Show Prediction (ping)"), Config()->m_ClShowpred, &Button))
 	{
-		Config()->m_ClShowfps ^= 1;
+		Config()->m_ClShowpred ^= 1;
 	}
 
 	return BackgroundHeight;
