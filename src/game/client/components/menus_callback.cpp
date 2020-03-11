@@ -420,3 +420,28 @@ void CMenus::DoJoystickAxisPicker(CUIRect View)
 		Row.VSplitLeft(StatusMargin, 0, &Row);
 	}
 }
+
+float CMenus::RenderSettingsBloatHud(CUIRect View)
+{
+
+	int NumOptions = 1;
+	float ButtonHeight = 20.0f;
+	float Spacing = 2.0f;
+	float BackgroundHeight = (float)NumOptions*ButtonHeight+(float)NumOptions*Spacing;
+
+	View.HSplitTop(BackgroundHeight, &View, 0);
+	RenderTools()->DrawUIRect(&View, vec4(0.0f, 0.0f, 0.0f, 0.25f), CUI::CORNER_B, 5.0f);
+
+	CUIRect Button;
+	View.HSplitTop(Spacing, 0, &View);
+	View.HSplitTop(ButtonHeight, &Button, &View);
+	static int s_ButtonShowPred = 0;
+
+	// TODO: Change this when show_pred is pushed.
+	if(DoButton_CheckBox(&s_ButtonShowPred, Localize("Show Prediction (ping)"), Config()->m_ClShowfps, &Button))
+	{
+		Config()->m_ClShowfps ^= 1;
+	}
+
+	return BackgroundHeight;
+}

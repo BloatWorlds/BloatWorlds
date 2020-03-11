@@ -29,7 +29,7 @@ void CMenus::RenderStartMenu(CUIRect MainView)
 	CUIRect BloatwarsLabel;
 	
 	MainView.HMargin(60, &BloatwarsLabel);
-	UI()->DoLabel(&BloatwarsLabel, "BloatWars", 40.0f, CUI::ALIGN_CENTER);
+	UI()->DoLabel(&BloatwarsLabel, "BloatWorlds", 40.0f, CUI::ALIGN_CENTER);
 
 	BloatwarsLabel.HMargin(60, &BloatwarsLabel);
 	UI()->DoLabel(&BloatwarsLabel, "Client", 30.0f, CUI::ALIGN_CENTER);

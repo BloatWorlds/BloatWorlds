@@ -2088,6 +2088,54 @@ void CMenus::RenderSettingsSound(CUIRect MainView)
 	}
 }
 
+void CMenus::RenderSettingsBloat(CUIRect MainView)
+{
+	// cut view
+	CUIRect BottomView, Button, Background;
+	MainView.HSplitBottom(80.0f, &MainView, &BottomView);
+	if(this->Client()->State() == IClient::STATE_ONLINE)
+		Background = MainView;
+	else
+		MainView.HSplitTop(20.0f, 0, &Background);
+	RenderTools()->DrawUIRect(&Background, vec4(0.0f, 0.0f, 0.0f, Config()->m_ClMenuAlpha/100.0f), Client()->State() == IClient::STATE_OFFLINE ? CUI::CORNER_ALL : CUI::CORNER_B, 5.0f);
+	MainView.HSplitTop(20.0f, 0, &MainView);
+	BottomView.HSplitTop(20.f, 0, &BottomView);
+
+	const float HeaderHeight = 20.0f;
+
+	static CScrollRegion s_ScrollRegion;
+	vec2 ScrollOffset(0, 0);
+	CScrollRegionParams ScrollParams;
+	ScrollParams.m_ClipBgColor = vec4(0,0,0,0);
+	s_ScrollRegion.Begin(&MainView, &ScrollOffset, &ScrollParams);
+	MainView.y += ScrollOffset.y;
+
+	CUIRect LastExpandRect;
+	static int s_HudDropdown = 0;
+	static bool s_HudActive = true;
+	float Split = DoIndependentDropdownMenu(&s_HudDropdown, &MainView, Localize("HUD"), HeaderHeight, &CMenus::RenderSettingsBloatHud, &s_HudActive);
+
+	MainView.HSplitTop(Split+10.0f, &LastExpandRect, &MainView);
+	s_ScrollRegion.AddRect(LastExpandRect);
+
+	s_ScrollRegion.End();
+
+	// reset button
+	float Spacing = 3.0f;
+	float ButtonWidth = (BottomView.w/6.0f)-(Spacing*5.0)/6.0f;
+
+	BottomView.VSplitRight(ButtonWidth, 0, &BottomView);
+	RenderBackgroundShadow(&BottomView, true);
+
+	BottomView.HSplitTop(25.0f, &BottomView, 0);
+	Button = BottomView;
+	static CButtonContainer s_ResetButton;
+	if(DoButton_Menu(&s_ResetButton, Localize("Reset"), 0, &Button))
+	{
+		// reset bloat settings here
+	}
+}
+
 void CMenus::RenderSettings(CUIRect MainView)
 {
 	// handle which page should be rendered
@@ -2103,6 +2151,8 @@ void CMenus::RenderSettings(CUIRect MainView)
 		RenderSettingsGraphics(MainView);
 	else if(Config()->m_UiSettingsPage == SETTINGS_SOUND)
 		RenderSettingsSound(MainView);
+	else if(Config()->m_UiSettingsPage == SETTINGS_BLOATWORLDS)
+		RenderSettingsBloat(MainView);
 
 	MainView.HSplitBottom(32.0f, 0, &MainView);
 
